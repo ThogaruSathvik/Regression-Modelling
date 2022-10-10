@@ -1,18 +1,17 @@
 ---
-title: "Data PreProcessing"
-author: "Sathvik Thogaru"
-date: "08/02/2022"
+title: "Data Preprocessing"
+author: "Sathvik"
+desription: "Data Preprocessing"
+date: "10/09/2022"
 format:
   html:
     toc: true
     code-fold: true
     code-copy: true
     code-tools: true
+categories:
+  - data preprocessing
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 # Libraries
 
@@ -28,8 +27,8 @@ library(readxl)
 # Load datasets
 
 ```{r}
-n_149_with_Duans <- read_excel("n=149 with Duans.xlsx")
-X091522_LABWORKS_DOWNLOAD <- read_excel("091522 LABWORKS DOWNLOAD.xlsx")
+n_149_with_Duans <- read_excel("_data/n=149 with Duans.xlsx")
+X091522_LABWORKS_DOWNLOAD <- read_excel("_data/091522 LABWORKS DOWNLOAD.xlsx")
 ```
 
 
@@ -37,7 +36,7 @@ Had a problem while loading the data.`guess_max` determines how many cells in ea
 
 
 ```{r}
-pearson_data <- read_excel("1 of 3 - USGS gage data downloaded 092022.xlsx", 
+pearson_data <- read_excel("_data/1 of 3 - USGS gage data downloaded 092022.xlsx", 
     sheet = "Pearson", guess_max = 1048576)
 ```
 

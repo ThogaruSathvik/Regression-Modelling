@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Sathvik Thogaru">
-<meta name="dcterms.date" content="2022-08-02">
+<meta name="author" content="Sathvik">
+<meta name="dcterms.date" content="2022-10-09">
 
-<title>Statistic 625 Project - Data PreProcessing</title>
+<title>Statistic 625 Project - Data Preprocessing</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -160,8 +160,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <div class="quarto-title-block"><div><h1 class="title">Data PreProcessing</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
-                      </div>
+      <div class="quarto-title-block"><div><h1 class="title">Data Preprocessing</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+                                <div class="quarto-categories">
+                <div class="quarto-category">data preprocessing</div>
+              </div>
+                  </div>
   </div>
     
   
@@ -170,14 +173,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div>
       <div class="quarto-title-meta-heading">Author</div>
       <div class="quarto-title-meta-contents">
-               <p>Sathvik Thogaru </p>
+               <p>Sathvik </p>
             </div>
     </div>
       
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 2, 2022</p>
+        <p class="date">October 9, 2022</p>
       </div>
     </div>
       
@@ -561,109 +564,108 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb30" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Data PreProcessing"</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Sathvik Thogaru"</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "08/02/2022"</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="co">    code-copy: true</span></span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
-<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a><span class="fu"># Libraries</span></span>
-<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
-<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a><span class="fu"># Load datasets</span></span>
-<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a>n_149_with_Duans <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"_data/n=149 with Duans.xlsx"</span>)</span>
-<span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a>X091522_LABWORKS_DOWNLOAD <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"_data/091522 LABWORKS DOWNLOAD.xlsx"</span>)</span>
-<span id="cb30-36"><a href="#cb30-36" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Data Preprocessing"</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Sathvik"</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="an">desription:</span><span class="co"> "Data Preprocessing"</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "10/09/2022"</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="co">    code-copy: true</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="co">  - data preprocessing</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a><span class="fu"># Libraries</span></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a><span class="fu"># Load datasets</span></span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a>n_149_with_Duans <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"_data/n=149 with Duans.xlsx"</span>)</span>
+<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a>X091522_LABWORKS_DOWNLOAD <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"_data/091522 LABWORKS DOWNLOAD.xlsx"</span>)</span>
+<span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-36"><a href="#cb30-36" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-37"><a href="#cb30-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-38"><a href="#cb30-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-39"><a href="#cb30-39" aria-hidden="true" tabindex="-1"></a>Had a problem while loading the data.<span class="in">`guess_max`</span> determines how many cells in each column are used to make a guess of the column type. we can provide a <span class="in">`guess_max`</span>  for read_excel to correctly guess the column type. </span>
+<span id="cb30-38"><a href="#cb30-38" aria-hidden="true" tabindex="-1"></a>Had a problem while loading the data.<span class="in">`guess_max`</span> determines how many cells in each column are used to make a guess of the column type. we can provide a <span class="in">`guess_max`</span>  for read_excel to correctly guess the column type. </span>
+<span id="cb30-39"><a href="#cb30-39" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-40"><a href="#cb30-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-41"><a href="#cb30-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-44"><a href="#cb30-44" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-45"><a href="#cb30-45" aria-hidden="true" tabindex="-1"></a>pearson_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"_data/1 of 3 - USGS gage data downloaded 092022.xlsx"</span>, </span>
-<span id="cb30-46"><a href="#cb30-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">sheet =</span> <span class="st">"Pearson"</span>, <span class="at">guess_max =</span> <span class="dv">1048576</span>)</span>
-<span id="cb30-47"><a href="#cb30-47" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-43"><a href="#cb30-43" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-44"><a href="#cb30-44" aria-hidden="true" tabindex="-1"></a>pearson_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"_data/1 of 3 - USGS gage data downloaded 092022.xlsx"</span>, </span>
+<span id="cb30-45"><a href="#cb30-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">sheet =</span> <span class="st">"Pearson"</span>, <span class="at">guess_max =</span> <span class="dv">1048576</span>)</span>
+<span id="cb30-46"><a href="#cb30-46" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-47"><a href="#cb30-47" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-48"><a href="#cb30-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-49"><a href="#cb30-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-52"><a href="#cb30-52" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-53"><a href="#cb30-53" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(n_149_with_Duans)</span>
-<span id="cb30-54"><a href="#cb30-54" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pearson_data)</span>
-<span id="cb30-55"><a href="#cb30-55" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-56"><a href="#cb30-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-57"><a href="#cb30-57" aria-hidden="true" tabindex="-1"></a><span class="fu">## finding the datetime column class in the datasets</span></span>
-<span id="cb30-58"><a href="#cb30-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-61"><a href="#cb30-61" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-62"><a href="#cb30-62" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(n_149_with_Duans<span class="sc">$</span>datetime)</span>
-<span id="cb30-63"><a href="#cb30-63" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(pearson_data<span class="sc">$</span>datetime)</span>
-<span id="cb30-64"><a href="#cb30-64" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-65"><a href="#cb30-65" aria-hidden="true" tabindex="-1"></a>Both the datetime columns in the datsets are of the **"POSIXct" "POSIXt"** class</span>
-<span id="cb30-66"><a href="#cb30-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-67"><a href="#cb30-67" aria-hidden="true" tabindex="-1"></a><span class="fu">## finding the range of the datetime column for datasets</span></span>
-<span id="cb30-68"><a href="#cb30-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-71"><a href="#cb30-71" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-72"><a href="#cb30-72" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(n_149_with_Duans<span class="sc">$</span>datetime)</span>
-<span id="cb30-73"><a href="#cb30-73" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-74"><a href="#cb30-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-75"><a href="#cb30-75" aria-hidden="true" tabindex="-1"></a><span class="in">`n_149_with_Duans`</span> has the data between time period  **2019-05-22 10:00:00 UTC - 2021-10-11 09:55:00 UTC**</span>
-<span id="cb30-76"><a href="#cb30-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-79"><a href="#cb30-79" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-80"><a href="#cb30-80" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(pearson_data<span class="sc">$</span>datetime)</span>
-<span id="cb30-81"><a href="#cb30-81" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-82"><a href="#cb30-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-83"><a href="#cb30-83" aria-hidden="true" tabindex="-1"></a><span class="in">`pearson_data`</span> has the data data between time period  **2019-03-01 00:00:00 UTC - 2022-09-20 10:30:00 UTC**</span>
-<span id="cb30-84"><a href="#cb30-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-85"><a href="#cb30-85" aria-hidden="true" tabindex="-1"></a>Restricting the pearson data in between time range of <span class="in">`n_149_with_Duans`</span> i.e., **2019-05-22 10:00:00 UTC - 2021-10-11 09:55:00 UTC** since we have the Ecoli values for this range of data</span>
-<span id="cb30-86"><a href="#cb30-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-89"><a href="#cb30-89" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-90"><a href="#cb30-90" aria-hidden="true" tabindex="-1"></a>pearson_data <span class="ot">&lt;-</span> pearson_data[pearson_data<span class="sc">$</span>datetime <span class="sc">&gt;=</span> <span class="fu">min</span>(n_149_with_Duans<span class="sc">$</span>datetime)</span>
-<span id="cb30-91"><a href="#cb30-91" aria-hidden="true" tabindex="-1"></a>                             <span class="sc">&amp;</span> pearson_data<span class="sc">$</span>datetime <span class="sc">&lt;=</span> <span class="fu">max</span>(n_149_with_Duans<span class="sc">$</span>datetime),]</span>
-<span id="cb30-92"><a href="#cb30-92" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-51"><a href="#cb30-51" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-52"><a href="#cb30-52" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(n_149_with_Duans)</span>
+<span id="cb30-53"><a href="#cb30-53" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pearson_data)</span>
+<span id="cb30-54"><a href="#cb30-54" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-55"><a href="#cb30-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-56"><a href="#cb30-56" aria-hidden="true" tabindex="-1"></a><span class="fu">## finding the datetime column class in the datasets</span></span>
+<span id="cb30-57"><a href="#cb30-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-60"><a href="#cb30-60" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-61"><a href="#cb30-61" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(n_149_with_Duans<span class="sc">$</span>datetime)</span>
+<span id="cb30-62"><a href="#cb30-62" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(pearson_data<span class="sc">$</span>datetime)</span>
+<span id="cb30-63"><a href="#cb30-63" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-64"><a href="#cb30-64" aria-hidden="true" tabindex="-1"></a>Both the datetime columns in the datsets are of the **"POSIXct" "POSIXt"** class</span>
+<span id="cb30-65"><a href="#cb30-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-66"><a href="#cb30-66" aria-hidden="true" tabindex="-1"></a><span class="fu">## finding the range of the datetime column for datasets</span></span>
+<span id="cb30-67"><a href="#cb30-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-70"><a href="#cb30-70" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-71"><a href="#cb30-71" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(n_149_with_Duans<span class="sc">$</span>datetime)</span>
+<span id="cb30-72"><a href="#cb30-72" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-73"><a href="#cb30-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-74"><a href="#cb30-74" aria-hidden="true" tabindex="-1"></a><span class="in">`n_149_with_Duans`</span> has the data between time period  **2019-05-22 10:00:00 UTC - 2021-10-11 09:55:00 UTC**</span>
+<span id="cb30-75"><a href="#cb30-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-78"><a href="#cb30-78" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-79"><a href="#cb30-79" aria-hidden="true" tabindex="-1"></a><span class="fu">range</span>(pearson_data<span class="sc">$</span>datetime)</span>
+<span id="cb30-80"><a href="#cb30-80" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-81"><a href="#cb30-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-82"><a href="#cb30-82" aria-hidden="true" tabindex="-1"></a><span class="in">`pearson_data`</span> has the data data between time period  **2019-03-01 00:00:00 UTC - 2022-09-20 10:30:00 UTC**</span>
+<span id="cb30-83"><a href="#cb30-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-84"><a href="#cb30-84" aria-hidden="true" tabindex="-1"></a>Restricting the pearson data in between time range of <span class="in">`n_149_with_Duans`</span> i.e., **2019-05-22 10:00:00 UTC - 2021-10-11 09:55:00 UTC** since we have the Ecoli values for this range of data</span>
+<span id="cb30-85"><a href="#cb30-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-88"><a href="#cb30-88" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-89"><a href="#cb30-89" aria-hidden="true" tabindex="-1"></a>pearson_data <span class="ot">&lt;-</span> pearson_data[pearson_data<span class="sc">$</span>datetime <span class="sc">&gt;=</span> <span class="fu">min</span>(n_149_with_Duans<span class="sc">$</span>datetime)</span>
+<span id="cb30-90"><a href="#cb30-90" aria-hidden="true" tabindex="-1"></a>                             <span class="sc">&amp;</span> pearson_data<span class="sc">$</span>datetime <span class="sc">&lt;=</span> <span class="fu">max</span>(n_149_with_Duans<span class="sc">$</span>datetime),]</span>
+<span id="cb30-91"><a href="#cb30-91" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-92"><a href="#cb30-92" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-93"><a href="#cb30-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-94"><a href="#cb30-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-95"><a href="#cb30-95" aria-hidden="true" tabindex="-1"></a>When found the lag between the time periods of each observation, the lag varies differently between the time periods for <span class="in">`n_149_with_Duans`</span> but is constant for <span class="in">`pearson_data`</span> which is **900** secs</span>
-<span id="cb30-98"><a href="#cb30-98" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-99"><a href="#cb30-99" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pearson_data<span class="sc">$</span>datetime <span class="sc">-</span> <span class="fu">lag</span>(pearson_data<span class="sc">$</span>datetime), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1000</span>), <span class="at">ylab =</span> <span class="st">"time lag between two observations"</span>, <span class="at">main =</span> <span class="st">"pearson_data"</span>)</span>
-<span id="cb30-100"><a href="#cb30-100" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-101"><a href="#cb30-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-104"><a href="#cb30-104" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-105"><a href="#cb30-105" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(n_149_with_Duans<span class="sc">$</span>datetime <span class="sc">-</span> <span class="fu">lag</span>(n_149_with_Duans<span class="sc">$</span>datetime), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1000</span>), <span class="at">ylab =</span> <span class="st">"time lag between two observations"</span>, <span class="at">main =</span> <span class="st">"n_149_with_Duans"</span>)</span>
-<span id="cb30-106"><a href="#cb30-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-107"><a href="#cb30-107" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-94"><a href="#cb30-94" aria-hidden="true" tabindex="-1"></a>When found the lag between the time periods of each observation, the lag varies differently between the time periods for <span class="in">`n_149_with_Duans`</span> but is constant for <span class="in">`pearson_data`</span> which is **900** secs</span>
+<span id="cb30-97"><a href="#cb30-97" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-98"><a href="#cb30-98" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pearson_data<span class="sc">$</span>datetime <span class="sc">-</span> <span class="fu">lag</span>(pearson_data<span class="sc">$</span>datetime), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1000</span>), <span class="at">ylab =</span> <span class="st">"time lag between two observations"</span>, <span class="at">main =</span> <span class="st">"pearson_data"</span>)</span>
+<span id="cb30-99"><a href="#cb30-99" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-100"><a href="#cb30-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-103"><a href="#cb30-103" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-104"><a href="#cb30-104" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(n_149_with_Duans<span class="sc">$</span>datetime <span class="sc">-</span> <span class="fu">lag</span>(n_149_with_Duans<span class="sc">$</span>datetime), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1000</span>), <span class="at">ylab =</span> <span class="st">"time lag between two observations"</span>, <span class="at">main =</span> <span class="st">"n_149_with_Duans"</span>)</span>
+<span id="cb30-105"><a href="#cb30-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-106"><a href="#cb30-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-107"><a href="#cb30-107" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-108"><a href="#cb30-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-109"><a href="#cb30-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-110"><a href="#cb30-110" aria-hidden="true" tabindex="-1"></a>Considering only the observations that are in the n_149_with_Duans, merging the <span class="in">`pearson_data`</span> and <span class="in">`n_149_with_Duans`</span>by datetime and keeping all the values in <span class="in">`n_149_with_Duans`</span></span>
-<span id="cb30-111"><a href="#cb30-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-114"><a href="#cb30-114" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-115"><a href="#cb30-115" aria-hidden="true" tabindex="-1"></a>merged_data <span class="ot">&lt;-</span> <span class="fu">merge</span>(pearson_data,n_149_with_Duans, <span class="at">by =</span> <span class="st">"datetime"</span>, <span class="at">all.y =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb30-116"><a href="#cb30-116" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-117"><a href="#cb30-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-118"><a href="#cb30-118" aria-hidden="true" tabindex="-1"></a>splitting the datetime column into <span class="in">`Year`</span>, <span class="in">`month`</span>, <span class="in">`day`</span>, and <span class="in">`time`</span> for future data analysis</span>
-<span id="cb30-119"><a href="#cb30-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-122"><a href="#cb30-122" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-123"><a href="#cb30-123" aria-hidden="true" tabindex="-1"></a>merged_data<span class="sc">$</span>Date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(merged_data<span class="sc">$</span>datetime)</span>
-<span id="cb30-124"><a href="#cb30-124" aria-hidden="true" tabindex="-1"></a>merged_data <span class="ot">&lt;-</span> merged_data <span class="sc">%&gt;%</span> </span>
-<span id="cb30-125"><a href="#cb30-125" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">separate</span>(<span class="st">"Date"</span>, <span class="fu">c</span>(<span class="st">"Year"</span>, <span class="st">"Month"</span>, <span class="st">"Day"</span>), <span class="at">sep =</span> <span class="st">"-"</span>)</span>
-<span id="cb30-126"><a href="#cb30-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-127"><a href="#cb30-127" aria-hidden="true" tabindex="-1"></a>merged_data<span class="sc">$</span>Time <span class="ot">&lt;-</span> <span class="fu">format</span>(merged_data<span class="sc">$</span>datetime,<span class="st">"%H:%M:%S"</span>)</span>
-<span id="cb30-128"><a href="#cb30-128" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-109"><a href="#cb30-109" aria-hidden="true" tabindex="-1"></a>Considering only the observations that are in the n_149_with_Duans, merging the <span class="in">`pearson_data`</span> and <span class="in">`n_149_with_Duans`</span>by datetime and keeping all the values in <span class="in">`n_149_with_Duans`</span></span>
+<span id="cb30-110"><a href="#cb30-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-113"><a href="#cb30-113" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-114"><a href="#cb30-114" aria-hidden="true" tabindex="-1"></a>merged_data <span class="ot">&lt;-</span> <span class="fu">merge</span>(pearson_data,n_149_with_Duans, <span class="at">by =</span> <span class="st">"datetime"</span>, <span class="at">all.y =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb30-115"><a href="#cb30-115" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-116"><a href="#cb30-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-117"><a href="#cb30-117" aria-hidden="true" tabindex="-1"></a>splitting the datetime column into <span class="in">`Year`</span>, <span class="in">`month`</span>, <span class="in">`day`</span>, and <span class="in">`time`</span> for future data analysis</span>
+<span id="cb30-118"><a href="#cb30-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-121"><a href="#cb30-121" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb30-122"><a href="#cb30-122" aria-hidden="true" tabindex="-1"></a>merged_data<span class="sc">$</span>Date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(merged_data<span class="sc">$</span>datetime)</span>
+<span id="cb30-123"><a href="#cb30-123" aria-hidden="true" tabindex="-1"></a>merged_data <span class="ot">&lt;-</span> merged_data <span class="sc">%&gt;%</span> </span>
+<span id="cb30-124"><a href="#cb30-124" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">separate</span>(<span class="st">"Date"</span>, <span class="fu">c</span>(<span class="st">"Year"</span>, <span class="st">"Month"</span>, <span class="st">"Day"</span>), <span class="at">sep =</span> <span class="st">"-"</span>)</span>
+<span id="cb30-125"><a href="#cb30-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-126"><a href="#cb30-126" aria-hidden="true" tabindex="-1"></a>merged_data<span class="sc">$</span>Time <span class="ot">&lt;-</span> <span class="fu">format</span>(merged_data<span class="sc">$</span>datetime,<span class="st">"%H:%M:%S"</span>)</span>
+<span id="cb30-127"><a href="#cb30-127" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

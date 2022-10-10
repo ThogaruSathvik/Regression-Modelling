@@ -1,12 +1,5 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Regression Modelling Project",
-    "section": "",
-    "text": "Data Preprocessing\n\n\n\n\n\n\n\ndata preprocessing\n\n\n\n\n\n\n\n\n\n\n\nOct 9, 2022\n\n\nSathvik\n\n\n\n\n\n\nNo matching items"
-  },
-  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "Contributors",
@@ -14,24 +7,38 @@
     "text": "Ning Duan\nSaid Arslan\nSathvik Thogaru\nThomas Robacker"
   },
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Regression Modelling Project",
+    "section": "",
+    "text": "Data Preprocessing\n\n\n\n\n\n\n\ndata preprocessing\n\n\n\n\n\n\n\n\n\n\n\nOct 9, 2022\n\n\nSathvik\n\n\n\n\n\n\nNo matching items"
+  },
+  {
     "objectID": "posts/data_preprocessing.html",
     "href": "posts/data_preprocessing.html",
     "title": "Data Preprocessing",
     "section": "",
-    "text": "Code\nknitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)\nlibrary(ggplot2)\nlibrary(dplyr)\n\n\n\nAttaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\n\nCode\nlibrary(tidyr)\nlibrary(plotly)\n\n\n\nAttaching package: 'plotly'\n\n\nThe following object is masked from 'package:ggplot2':\n\n    last_plot\n\n\nThe following object is masked from 'package:stats':\n\n    filter\n\n\nThe following object is masked from 'package:graphics':\n\n    layout\n\n\nCode\nlibrary(readxl)\nlibrary(tidyverse)\n\n\n── Attaching packages\n───────────────────────────────────────\ntidyverse 1.3.2 ──\n\n\n✔ tibble  3.1.8     ✔ stringr 1.4.1\n✔ readr   2.1.3     ✔ forcats 0.5.2\n✔ purrr   0.3.5     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ plotly::filter() masks dplyr::filter(), stats::filter()\n✖ dplyr::lag()     masks stats::lag()"
+    "text": "Code\nknitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)\nlibrary(readxl)\nlibrary(ggplot2)\nlibrary(dplyr)\n\n\n\nAttaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\n\nCode\nlibrary(tidyr)\nlibrary(tidyverse)\n\n\n── Attaching packages\n───────────────────────────────────────\ntidyverse 1.3.2 ──\n\n\n✔ tibble  3.1.8     ✔ stringr 1.4.0\n✔ readr   2.1.2     ✔ forcats 0.5.1\n✔ purrr   0.3.4     \n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()"
+  },
+  {
+    "objectID": "posts/data_preprocessing.html#load-datasets",
+    "href": "posts/data_preprocessing.html#load-datasets",
+    "title": "Data Preprocessing",
+    "section": "Load datasets",
+    "text": "Load datasets\n\n\nCode\nn_149_with_Duans <- read_excel(\"_data/n=149 with Duans.xlsx\")\nX091522_LABWORKS_DOWNLOAD <- read_excel(\"_data/091522 LABWORKS DOWNLOAD.xlsx\")\n\nn_149_with_Duans\n\n\n# A tibble: 149 × 9\n   datetime             TURB ECOLI arithmetic -…¹ predi…²     SD neg S…³ 1.96 …⁴\n   <dttm>              <dbl> <dbl>          <dbl>   <dbl>  <dbl>   <dbl>   <dbl>\n 1 2019-05-22 10:00:00   3     130           45.9    55.7   85.8    24.6    156.\n 2 2019-05-29 09:45:00   3      77           45.9    55.7   85.8    24.6    156.\n 3 2019-06-05 08:00:00   3.7    50           59.9    72.7  112.     32.1    204.\n 4 2019-06-12 10:00:00  19.9   488          505.    613.   943.    270.    1719.\n 5 2019-06-19 08:00:00  69    2685         2442.   2965.  4561.   1307.    8310.\n 6 2019-06-19 10:15:00  58.9  1990         1998.   2426.  3732.   1069.    6800.\n 7 2019-06-26 08:00:00  15.9   205          380.    461.   710.    203.    1293.\n 8 2019-07-10 08:00:00  14.8   100          347.    421.   648.    186.    1181.\n 9 2019-07-10 10:30:00  14     162          323.    393.   604.    173.    1101.\n10 2019-07-17 08:00:00  43.5   480         1361.   1652.  2542.    728.    4631.\n# … with 139 more rows, 1 more variable: `neg 1.96 SD` <dbl>, and abbreviated\n#   variable names ¹​`arithmetic - Predicted ECOLI`,\n#   ²​`predicted ecoli with Duans smearing adjustment`, ³​`neg SD`, ⁴​`1.96 SD`\n# ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names\n\n\nHad a problem while loading the data.guess_max determines how many cells in each column are used to make a guess of the column type. we can provide a guess_max for read_excel to correctly guess the column type.\n\n\nCode\npearson_data <- read_excel(\"_data/1 of 3 - USGS gage data downloaded 092022.xlsx\", \n    sheet = \"Pearson\", guess_max = 1048576)\n\npearson_data\n\n\n# A tibble: 124,746 × 23\n   agency_cd Name  site_no datetime            tz_cd    pH pH-st…¹    DO DO-st…²\n   <chr>     <chr>   <dbl> <dttm>              <chr> <dbl> <chr>   <dbl> <chr>  \n 1 USGS      Pear… 3451500 2019-03-01 00:00:00 EST      NA <NA>       NA <NA>   \n 2 USGS      Pear… 3451500 2019-03-01 00:15:00 EST      NA <NA>       NA <NA>   \n 3 USGS      Pear… 3451500 2019-03-01 00:30:00 EST      NA <NA>       NA <NA>   \n 4 USGS      Pear… 3451500 2019-03-01 00:45:00 EST      NA <NA>       NA <NA>   \n 5 USGS      Pear… 3451500 2019-03-01 01:00:00 EST      NA <NA>       NA <NA>   \n 6 USGS      Pear… 3451500 2019-03-01 01:15:00 EST      NA <NA>       NA <NA>   \n 7 USGS      Pear… 3451500 2019-03-01 01:30:00 EST      NA <NA>       NA <NA>   \n 8 USGS      Pear… 3451500 2019-03-01 01:45:00 EST      NA <NA>       NA <NA>   \n 9 USGS      Pear… 3451500 2019-03-01 02:00:00 EST      NA <NA>       NA <NA>   \n10 USGS      Pear… 3451500 2019-03-01 02:15:00 EST      NA <NA>       NA <NA>   \n# … with 124,736 more rows, 14 more variables: SC <dbl>, `SC-status` <chr>,\n#   Turb_FNU <dbl>, `Turb-status` <chr>, WL_Elev <dbl>, `WL_Elev-status` <chr>,\n#   Temp_C <dbl>, `Temp-status` <chr>, Q_cfs <dbl>, `Q-status` <chr>,\n#   Stage_ft <dbl>, `Stage - status` <chr>, Precip_in <dbl>,\n#   `Precip-status` <chr>, and abbreviated variable names ¹​`pH-status`,\n#   ²​`DO-status`\n# ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names"
   },
   {
     "objectID": "posts/data_preprocessing.html#finding-the-datetime-column-class-in-the-datasets",
     "href": "posts/data_preprocessing.html#finding-the-datetime-column-class-in-the-datasets",
     "title": "Data Preprocessing",
     "section": "finding the datetime column class in the datasets",
-    "text": "finding the datetime column class in the datasets\n\n\n[1] \"POSIXct\" \"POSIXt\" \n\n\n[1] \"POSIXct\" \"POSIXt\" \n\n\nBoth the datetime columns in the datsets are of the “POSIXct” “POSIXt” class"
+    "text": "finding the datetime column class in the datasets\n\n\nCode\nclass(n_149_with_Duans$datetime)\n\n\n[1] \"POSIXct\" \"POSIXt\" \n\n\nCode\nclass(pearson_data$datetime)\n\n\n[1] \"POSIXct\" \"POSIXt\" \n\n\nBoth the datetime columns in the datsets are of the \"POSIXct\" \"POSIXt\" class"
   },
   {
     "objectID": "posts/data_preprocessing.html#finding-the-range-of-the-datetime-column-for-datasets",
     "href": "posts/data_preprocessing.html#finding-the-range-of-the-datetime-column-for-datasets",
     "title": "Data Preprocessing",
     "section": "finding the range of the datetime column for datasets",
-    "text": "finding the range of the datetime column for datasets\n\n\n[1] \"2019-05-22 10:00:00 UTC\" \"2021-10-11 09:55:00 UTC\"\n\n\nn_149_with_Duans has the data between time period 2019-05-22 10:00:00 UTC - 2021-10-11 09:55:00 UTC\n\n\n[1] \"2019-03-01 00:00:00 UTC\" \"2022-09-20 10:30:00 UTC\"\n\n\npearson_data has the data data between time period 2019-03-01 00:00:00 UTC - 2022-09-20 10:30:00 UTC\nRestricting the pearson data in between time range of n_149_with_Duans i.e., 2019-05-22 10:00:00 UTC - 2021-10-11 09:55:00 UTC since we have the Ecoli values for this range of data\n\n\n\nWhen found the lag between the time periods of each observation, the lag varies differently between the time periods for n_149_with_Duans but is constant for pearson_data which is 900 secs\n\n\n\n\n\n\n\n\n\n\nConsidering only the observations that are in the n_149_with_Duans, merging the pearson_data and n_149_with_Duansby datetime and keeping all the values in n_149_with_Duans\n\n\n\nsplitting the datetime column into Year, month, day, and time for future data analysis"
+    "text": "finding the range of the datetime column for datasets\n\n\nCode\nrange(n_149_with_Duans$datetime)\n\n\n[1] \"2019-05-22 10:00:00 UTC\" \"2021-10-11 09:55:00 UTC\"\n\n\nn_149_with_Duans has the data between time period 2019-05-22 10:00:00 UTC - 2021-10-11 09:55:00 UTC\n\n\nCode\nrange(pearson_data$datetime)\n\n\n[1] \"2019-03-01 00:00:00 UTC\" \"2022-09-20 10:30:00 UTC\"\n\n\npearson_data has the data data between time period 2019-03-01 00:00:00 UTC to 2022-09-20 10:30:00 UTC\nRestricting the pearson data in between time range of n_149_with_Duans i.e., 2019-05-22 10:00:00 UTC - 2021-10-11 09:55:00 UTC since we have the Ecoli values for this range of data\n\n\nCode\npearson_data <- pearson_data[pearson_data$datetime >= min(n_149_with_Duans$datetime)\n                             & pearson_data$datetime <= max(n_149_with_Duans$datetime),]\n\n\nWhen found the lag between the time periods of each observation, the lag varies differently between the time periods for n_149_with_Duans but is constant for pearson_data which is 900 secs\n\n\nCode\nplot(pearson_data$datetime - lag(pearson_data$datetime), ylim = c(0,1000), ylab = \"time lag between two observations\", main = \"pearson_data\")\n\n\n\n\n\n\n\nCode\nplot(n_149_with_Duans$datetime - lag(n_149_with_Duans$datetime), ylim = c(0,1000), ylab = \"time lag between two observations\", main = \"n_149_with_Duans\")\n\n\n\n\n\nConsidering only the observations that are in the n_149_with_Duans, merging the pearson_data and n_149_with_Duansby datetime and keeping all the values in n_149_with_Duans\n\n\nCode\nmerged_data <- merge(pearson_data,n_149_with_Duans, by = \"datetime\", all.y = TRUE)\n\n\nsplitting the datetime column into Year, month, day, and time for future data analysis\n\n\nCode\nmerged_data$Date <- as.Date(merged_data$datetime)\nmerged_data <- merged_data %>% \n  tidyr::separate(\"Date\", c(\"Year\", \"Month\", \"Day\"), sep = \"-\")\n\nmerged_data$Time <- format(merged_data$datetime,\"%H:%M:%S\")"
   }
 ]

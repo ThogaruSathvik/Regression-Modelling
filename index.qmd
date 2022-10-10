@@ -1,14 +1,14 @@
 ---
-title: "Statistic 625 Project"
+title: "Regression Modelling Project"
 listing:
   contents: posts
   sort: "date desc"
   type: default
   categories: true
-  sort-ui: false
-  filter-ui: false
-page-layout: full
-title-block-banner: true
 ---
 
+
+```{r echo=FALSE}
+#cat(paste("Blog Last Updated:", Sys.time()))
+```
 

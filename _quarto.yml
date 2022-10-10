@@ -2,18 +2,32 @@ project:
   type: website
 
 website:
-  title: "Statistic 625 Project"
+  title: "Regression Modelling"
+  site-url: https://github.com/ThogaruSathvik/Regression-Modelling
+  twitter-card:
+    creator: "@UMassDACSS"
+    site: "@UMassDACSS"
   navbar:
+    background: "#881c1c"
+    logo: images/UMass White Wordmark Horiz.png
     right:
-      - about.qmd
+      - text: "Posts"
+        href: https://thogarusathvik.github.io/Regression-Modelling/
+      - text: "Contributors"
+        file: about.qmd
       - icon: github
-        href: https://github.com/
-      - icon: twitter
-        href: https://twitter.com
+        href: https://github.com/ThogaruSathvik/Regression-Modelling
+        aria-label: GitHub
+
+execution:
+  freeze: auto
+
+
 format:
   html:
-    theme: cosmo
-    css: styles.css
-
-
-
+    mainfont: Open Sans
+    linkcolor: "#881c1c"
+    toc: true
+    theme: 
+      light: [flatly, styles.scss]
+      dark: [darkly, styles.scss]

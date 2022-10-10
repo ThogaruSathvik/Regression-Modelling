@@ -4,12 +4,8 @@ project:
 website:
   title: "Regression Modelling"
   site-url: https://github.com/ThogaruSathvik/Regression-Modelling
-  twitter-card:
-    creator: "@UMassDACSS"
-    site: "@UMassDACSS"
   navbar:
     background: "#881c1c"
-    logo: images/UMass White Wordmark Horiz.png
     right:
       - text: "Posts"
         href: https://thogarusathvik.github.io/Regression-Modelling/

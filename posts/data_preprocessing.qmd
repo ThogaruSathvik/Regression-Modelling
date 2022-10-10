@@ -5,6 +5,7 @@ desription: "Data Preprocessing"
 date: "10/09/2022"
 format:
   html:
+    df-print: paged
     toc: true
     code-fold: true
     code-copy: true
@@ -13,29 +14,23 @@ categories:
   - data preprocessing
 ---
 
-# Libraries
+## Libraries
 
 ```{r}
-knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(readxl)
 library(ggplot2)
 library(dplyr)
 library(tidyr)
-library(plotly)
-library(readxl)
 library(tidyverse)
 ```
 
-# Load datasets
-
-```{r}
-hotel <- read_csv("_data/hotel_bookings.csv")
-hotel
-```
-
+## Load datasets
 
 ```{r}
 n_149_with_Duans <- read_excel("_data/n=149 with Duans.xlsx")
 X091522_LABWORKS_DOWNLOAD <- read_excel("_data/091522 LABWORKS DOWNLOAD.xlsx")
+
+n_149_with_Duans
 ```
 
 
@@ -45,13 +40,10 @@ Had a problem while loading the data.`guess_max` determines how many cells in ea
 ```{r}
 pearson_data <- read_excel("_data/1 of 3 - USGS gage data downloaded 092022.xlsx", 
     sheet = "Pearson", guess_max = 1048576)
-```
 
-
-```{r}
-n_149_with_Duans
 pearson_data
 ```
+
 
 ## finding the datetime column class in the datasets
 
@@ -59,7 +51,7 @@ pearson_data
 class(n_149_with_Duans$datetime)
 class(pearson_data$datetime)
 ```
-Both the datetime columns in the datsets are of the **"POSIXct" "POSIXt"** class
+Both the datetime columns in the datsets are of the `"POSIXct" "POSIXt"` class
 
 ## finding the range of the datetime column for datasets
 
@@ -67,15 +59,15 @@ Both the datetime columns in the datsets are of the **"POSIXct" "POSIXt"** class
 range(n_149_with_Duans$datetime)
 ```
 
-`n_149_with_Duans` has the data between time period  **2019-05-22 10:00:00 UTC - 2021-10-11 09:55:00 UTC**
+`n_149_with_Duans` has the data between time period  `2019-05-22 10:00:00 UTC - 2021-10-11 09:55:00 UTC`
 
 ```{r}
 range(pearson_data$datetime)
 ```
 
-`pearson_data` has the data data between time period  **2019-03-01 00:00:00 UTC - 2022-09-20 10:30:00 UTC**
+`pearson_data` has the data data between time period  `2019-03-01 00:00:00 UTC to 2022-09-20 10:30:00 UTC`
 
-Restricting the pearson data in between time range of `n_149_with_Duans` i.e., **2019-05-22 10:00:00 UTC - 2021-10-11 09:55:00 UTC** since we have the Ecoli values for this range of data
+Restricting the pearson data in between time range of `n_149_with_Duans` i.e., `2019-05-22 10:00:00 UTC - 2021-10-11 09:55:00 UTC` since we have the Ecoli values for this range of data
 
 ```{r}
 pearson_data <- pearson_data[pearson_data$datetime >= min(n_149_with_Duans$datetime)
@@ -83,7 +75,7 @@ pearson_data <- pearson_data[pearson_data$datetime >= min(n_149_with_Duans$datet
 ```
 
 
-When found the lag between the time periods of each observation, the lag varies differently between the time periods for `n_149_with_Duans` but is constant for `pearson_data` which is **900** secs
+When found the lag between the time periods of each observation, the lag varies differently between the time periods for `n_149_with_Duans` but is constant for `pearson_data` which is `900` secs
 ```{r}
 plot(pearson_data$datetime - lag(pearson_data$datetime), ylim = c(0,1000), ylab = "time lag between two observations", main = "pearson_data")
 ```
@@ -102,10 +94,14 @@ merged_data <- merge(pearson_data,n_149_with_Duans, by = "datetime", all.y = TRU
 
 splitting the datetime column into `Year`, `month`, `day`, and `time` for future data analysis
 
+## Merged Data
+
 ```{r}
 merged_data$Date <- as.Date(merged_data$datetime)
 merged_data <- merged_data %>% 
   tidyr::separate("Date", c("Year", "Month", "Day"), sep = "-")
 
 merged_data$Time <- format(merged_data$datetime,"%H:%M:%S")
+
+merged_data
 ```

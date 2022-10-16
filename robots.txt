@@ -1,1 +1,1 @@
-Sitemap: https://github.com/ThogaruSathvik/Regression-Modelling/sitemap.xml
+Sitemap: https://ThogaruSathvik.github.io/Regression-Modelling/sitemap.xml

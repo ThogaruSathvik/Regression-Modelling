@@ -1,4 +1,4 @@
-Regression Modelling Project Repo
+## Regression Modelling Project Repo
 
 Kindly Edit the [README.md](https://github.com/ThogaruSathvik/Regression-Modelling/edit/main/README.md) file as needed
 

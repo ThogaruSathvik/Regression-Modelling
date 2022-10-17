@@ -1,5 +1,5 @@
 Regression Modelling Project Repo
 
-Kindly Edit the [README.md]() file as needed
+Kindly Edit the [README.md](https://github.com/ThogaruSathvik/Regression-Modelling/edit/main/README.md) file as needed
 
 Here is the link for our Project Blog [link]()

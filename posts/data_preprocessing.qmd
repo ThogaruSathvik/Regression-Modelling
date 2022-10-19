@@ -130,3 +130,11 @@ all_data
 ```
 
 :::
+
+## saving merged file
+
+```{r}
+all_data <- apply(as.data.frame(all_data),2 ,as.character)
+write.csv(all_data, "_data/merged_data.csv")
+```
+

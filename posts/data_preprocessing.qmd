@@ -16,92 +16,117 @@ categories:
 
 ## Libraries
 
-```{r}
+```{r, include=FALSE}
 library(readxl)
-library(ggplot2)
 library(dplyr)
 library(tidyr)
-library(tidyverse)
+library(dm)
+library(stringr)
+library(data.table)
 ```
 
 ## Load datasets
 
 ```{r}
-n_149_with_Duans <- read_excel("_data/n=149 with Duans.xlsx")
-X091522_LABWORKS_DOWNLOAD <- read_excel("_data/091522 LABWORKS DOWNLOAD.xlsx")
-
-n_149_with_Duans
+duans <- read_excel("_data/n=149 with Duans.xlsx")
+labworks <- read_excel("_data/091522 LABWORKS DOWNLOAD.xlsx") %>% filter(NAME == "PEARSON") %>% 
+  select(-c(UNITS, STATUS))
+usgs_gauge_data <- read_excel("_data/1 of 3 - USGS gage data downloaded 092022.xlsx",
+                              sheet = "Pearson", guess_max = 1048576)
 ```
 
 
 Had a problem while loading the data.`guess_max` determines how many cells in each column are used to make a guess of the column type. we can provide a `guess_max`  for read_excel to correctly guess the column type. 
 
 
-```{r}
-pearson_data <- read_excel("_data/1 of 3 - USGS gage data downloaded 092022.xlsx", 
-    sheet = "Pearson", guess_max = 1048576)
+## Data and the datatypes of Columns
 
-pearson_data
+```{r}
+dm_draw(dm(duans, labworks, usgs_gauge_data), view_type = "all", column_types = TRUE, focus = TRUE)
 ```
 
 
-## finding the datetime column class in the datasets
+cleaning columns with correct data types
+
+labworks$RESULT is character type in the table, correcting it to numeric type.  "NA" value introduced while correcting data type in (only one)observation where result is ">24200". 
+
+Filtered usgs_guage_data for the labworks datetime range
 
 ```{r}
-class(n_149_with_Duans$datetime)
-class(pearson_data$datetime)
-```
-Both the datetime columns in the datsets are of the `"POSIXct" "POSIXt"` class
+labworks$RESULT <- as.numeric(labworks$RESULT)
+labworks$WATERBODY <- as.factor(labworks$WATERBODY)
+labworks$LCOD <- as.factor(labworks$LCOD)
+labworks$PARAMETER <- as.factor(labworks$PARAMETER)
+labworks <- labworks %>% rename("datetime" = "DATETIME")
+# labworks <- labworks %>% rename("Name" = "NAME")
 
-## finding the range of the datetime column for datasets
-
-```{r}
-range(n_149_with_Duans$datetime)
-```
-
-`n_149_with_Duans` has the data between time period  `2019-05-22 10:00:00 UTC - 2021-10-11 09:55:00 UTC`
-
-```{r}
-range(pearson_data$datetime)
-```
-
-`pearson_data` has the data data between time period  `2019-03-01 00:00:00 UTC to 2022-09-20 10:30:00 UTC`
-
-Restricting the pearson data in between time range of `n_149_with_Duans` i.e., `2019-05-22 10:00:00 UTC - 2021-10-11 09:55:00 UTC` since we have the Ecoli values for this range of data
-
-```{r}
-pearson_data <- pearson_data[pearson_data$datetime >= min(n_149_with_Duans$datetime)
-                             & pearson_data$datetime <= max(n_149_with_Duans$datetime),]
+usgs_gauge_data <- usgs_gauge_data %>% 
+  filter(between (datetime, min(labworks$datetime), max(labworks$datetime)))
 ```
 
 
-When found the lag between the time periods of each observation, the lag varies differently between the time periods for `n_149_with_Duans` but is constant for `pearson_data` which is `900` secs
-```{r}
-plot(pearson_data$datetime - lag(pearson_data$datetime), ylim = c(0,1000), ylab = "time lag between two observations", main = "pearson_data")
-```
+
 
 ```{r}
-plot(n_149_with_Duans$datetime - lag(n_149_with_Duans$datetime), ylim = c(0,1000), ylab = "time lag between two observations", main = "n_149_with_Duans")
-
+labworks <- labworks %>% 
+  pivot_wider(names_from = PARAMETER, values_from =  RESULT)
+  
 ```
 
 
-Considering only the observations that are in the n_149_with_Duans, merging the `pearson_data` and `n_149_with_Duans`by datetime and keeping all the values in `n_149_with_Duans`
+Converting the dataframes to data.table and merging them to the nearest datetime.
 
 ```{r}
-merged_data <- merge(pearson_data,n_149_with_Duans, by = "datetime", all.y = TRUE)
+labworks <- data.table(labworks)
+usgs_gauge_data <- data.table(usgs_gauge_data)
+duans <- data.table(duans)
+
+setkey(labworks, datetime)
+setkey(usgs_gauge_data, datetime)
+setkey(duans, datetime)
+
+labworks_USGS_combined <- usgs_gauge_data[labworks , roll = "nearest" ] %>% select(-NAME)
+
+all_data <- duans[labworks_USGS_combined, roll = "nearest"]
+
+names(all_data) <- str_to_title(names(all_data))
+
 ```
 
-splitting the datetime column into `Year`, `month`, `day`, and `time` for future data analysis
+Information about [data.table](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html) <br/>
+Information about [setkey](https://www.rdocumentation.org/packages/data.table/versions/1.14.2/topics/setkey)<br/>
+Information about [roll = "nearest"](https://jangorecki.gitlab.io/data.cube/library/data.table/html/data.table.html)<br/>
 
-## Merged Data
+::: panel-tabset
+## duans
 
 ```{r}
-merged_data$Date <- as.Date(merged_data$datetime)
-merged_data <- merged_data %>% 
-  tidyr::separate("Date", c("Year", "Month", "Day"), sep = "-")
-
-merged_data$Time <- format(merged_data$datetime,"%H:%M:%S")
-
-merged_data
+duans
 ```
+
+## labworks
+
+```{r}
+labworks
+```
+
+
+## usgs_gauge_data
+
+```{r}
+usgs_gauge_data
+```
+
+## labworks USGS combined
+
+```{r}
+labworks_USGS_combined
+```
+
+## All data combined
+
+```{r}
+all_data
+```
+
+:::

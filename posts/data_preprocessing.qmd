@@ -85,11 +85,12 @@ setkey(labworks, datetime)
 setkey(usgs_gauge_data, datetime)
 setkey(duans, datetime)
 
-labworks_USGS_combined <- usgs_gauge_data[labworks , roll = "nearest" ] %>% select(-NAME)
+all_data_guage_labworks <- usgs_gauge_data[labworks , roll = "nearest" ] %>% select(-NAME)
 
-all_data <- duans[labworks_USGS_combined, roll = "nearest"]
+all_data_duans <- duans[all_data_guage_labworks, roll = "nearest"]
 
-names(all_data) <- str_to_title(names(all_data))
+names(all_data_guage_labworks) <- str_to_title(names(all_data_guage_labworks))
+names(all_data_duans) <- str_to_title(names(all_data_duans))
 
 ```
 
@@ -120,13 +121,13 @@ usgs_gauge_data
 ## labworks USGS combined
 
 ```{r}
-labworks_USGS_combined
+all_data_guage_labworks
 ```
 
 ## All data combined
 
 ```{r}
-all_data
+all_data_duans
 ```
 
 :::
@@ -134,7 +135,7 @@ all_data
 ## saving merged file
 
 ```{r}
-all_data <- apply(as.data.frame(all_data),2 ,as.character)
-write.csv(all_data, "_data/merged_data.csv")
+all_data <- apply(as.data.frame(all_data_guage_labworks),2 ,as.character)
+write.csv(all_data, "_data/all_data_guage_labworks.csv")
 ```
 

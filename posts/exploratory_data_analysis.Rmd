@@ -1,0 +1,86 @@
+---
+title: "Exploratory Data Analysis"
+author: "Ning Duan"
+date: "10/26/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r set up workspace}
+library(readr)
+all_data_guage_labworks <- read_csv("/Users/duanning/Downloads/Regression-Modelling/posts/_data/all_data_guage_labworks.csv")
+colnames(all_data_guage_labworks)
+summary(all_data_guage_labworks)
+
+Ecoli = as.numeric(all_data_guage_labworks$Ecoli_mpn)
+
+unique(all_data_guage_labworks$Tz_cd)
+unique(all_data_guage_labworks$`Ph-Status`)
+unique(all_data_guage_labworks$`Do-Status`)
+unique(all_data_guage_labworks$`Sc-Status`)
+unique(all_data_guage_labworks$`Turb-Status`)
+unique(all_data_guage_labworks$`Wl_elev-Status`)
+unique(all_data_guage_labworks$`Temp-Status`)
+unique(all_data_guage_labworks$`Q-Status`)
+unique(all_data_guage_labworks$`Stage - Status`)
+unique(all_data_guage_labworks$`Precip-Status`)
+unique(all_data_guage_labworks$`Waterbody`)
+unique(all_data_guage_labworks$`Lcod`)
+```
+
+Response: "Ecoli_mpn" (lab result).
+
+Predictors: "Ph" "Do" "Sc" "Turb_fnu" "Wl_elev" "Temp_c" "Q_cfs" "Stage_ft" "Precip_in"
+
+```{r}
+library(ggplot2)
+
+ggplot(all_data_guage_labworks, aes(x = 1:nrow(all_data_guage_labworks), y = Ecoli)) +
+  geom_point()
+
+ggplot(all_data_guage_labworks, aes(x = 1:nrow(all_data_guage_labworks), y = all_data_guage_labworks$Ph)) +
+  geom_point()
+
+ggplot(all_data_guage_labworks, aes(x = 1:nrow(all_data_guage_labworks), y = all_data_guage_labworks$Do)) +
+  geom_point()
+
+ggplot(all_data_guage_labworks, aes(x = 1:nrow(all_data_guage_labworks), y = all_data_guage_labworks$Sc)) +
+  geom_point()
+
+ggplot(all_data_guage_labworks, aes(x = 1:nrow(all_data_guage_labworks), y = all_data_guage_labworks$Turb_fnu)) +
+  geom_point()
+
+ggplot(all_data_guage_labworks, aes(x = 1:nrow(all_data_guage_labworks), y = all_data_guage_labworks$Wl_elev)) +
+  geom_point()
+
+ggplot(all_data_guage_labworks, aes(x = 1:nrow(all_data_guage_labworks), y = all_data_guage_labworks$Temp_c)) +
+  geom_point()
+
+ggplot(all_data_guage_labworks, aes(x = 1:nrow(all_data_guage_labworks), y = all_data_guage_labworks$Q_cfs)) +
+  geom_point()
+
+ggplot(all_data_guage_labworks, aes(x = 1:nrow(all_data_guage_labworks), y = all_data_guage_labworks$Stage_ft)) +
+  geom_point()
+
+ggplot(all_data_guage_labworks, aes(x = 1:nrow(all_data_guage_labworks), y = all_data_guage_labworks$Precip_in)) +
+  geom_point()
+```
+
+```{r}
+pairs(~ Ecoli + Ph + Do+ Sc + Turb_fnu + Wl_elev + Temp_c + Q_cfs + Stage_ft + Precip_in, data = all_data_guage_labworks)
+```
+
+```{r}
+m1 = lm(Ecoli ~ Ph + Do+ Sc + Turb_fnu + Wl_elev + Temp_c + Q_cfs + Stage_ft + Precip_in, data = all_data_guage_labworks)
+summary(m1)
+```
+
+A simple linear regression model.
+
+```{r}
+pairs(~ Wl_elev + Q_cfs + Stage_ft, data = all_data_guage_labworks)
+```
+Question: Are Wl_elev, Q_cfs, and Stage_ft transformations of each other?
